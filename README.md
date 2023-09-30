@@ -1,7 +1,7 @@
 # Amazon ElastiCache Caching for Amazon RDS
 __Optimize cost, increase throughput and boost performance of Amazon RDS workloads using Amazon ElastiCache__
 
-The purpose of this project is to help you reproduce test harness of Relational Database Management Systems (RDBMS) like [Amazon Relational Service](https://aws.amazon.com/rds/) (RDS) with and without a Cache such as [Amazon ElastiCache](https://aws.amazon.com/elasticache/).
+The purpose of this project is to help you reproduce test harness of Relational Database Management Systems (RDBMS) like [Amazon Relational Database Service](https://aws.amazon.com/rds/) (RDS) with and without a Cache such as [Amazon ElastiCache](https://aws.amazon.com/elasticache/).
 
 In-memory caching improves application performance by storing frequently accessed data items in memory, so that subsequent reads can be significantly faster than reading from the primary database that may default to disk-based storage.
 
