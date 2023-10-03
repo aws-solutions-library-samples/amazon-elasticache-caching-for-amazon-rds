@@ -35,5 +35,5 @@ stevedore==5.1.0
 tomli==2.0.1
 typeguard==2.13.3
 typing_extensions==4.7.1
-urllib3==1.26.16
+urllib3==1.26.17
 zipp==3.17.0
