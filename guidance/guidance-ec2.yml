@@ -1,0 +1,81 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Create and EC2 to demonstrate the benefits of pairing RDBSM workloads with AWS ElastiCache
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: Application EC2 Instance
+        Parameters:
+          - AppInstanceName
+          - AppInstanceKeyName
+          - AppInstanceClass
+          - AppInstanceSecurityGroup
+          - AppInstanceSubnet
+          - AppInstanceStorage
+Parameters:
+### Key PARAMS
+  AppInstanceKeyName:
+    Description: 'Name of a key pair that exists in the region'
+    Type: String
+    Default: US-EAST1
+    MinLength: '3'
+    MaxLength: '63'
+    AllowedPattern: "^[A-Za-z]+[0-9A-Z-]*$"
+
+  AppInstanceClass:
+    Description: 'The application EC2 instance class'
+    Type: String
+    # Default: c6g.xlarge
+    Default: t4g.micro
+    MinLength: '8'
+    MaxLength: '63'
+    AllowedPattern: "^[a-z0-9.]*$"
+
+  AppInstanceSecurityGroup:
+    Description: 'A security group with inbound rules for SSH connectivity from customer computer. And RDBMS and ElastiCache'
+    Type: String
+    Default: sg-0a87f73dcc1dffc4f
+    MinLength: '8'
+    MaxLength: '63'
+    # AllowedPattern: "^[a-zA-Z]+[0-9]+[-]*$"
+
+  AppInstanceSubnet:
+    Description: 'A valid subnet name in the default VPC'
+    Type: String
+    Default: subnet-05cfa282f9b9dc8df
+    MinLength: '8'
+    MaxLength: '63'
+    # AllowedPattern: "^[A-Za-z]+[0-9A-Z-]*$"
+
+  AppInstanceStorage:
+    Description: 'The application EC2 instance Storage in GB'
+    Type: String
+    Default: 8
+    MinLength: '1'
+    MaxLength: '3'
+    AllowedPattern: "^[0-9]*$"
+
+  AppInstanceName:
+    Description: 'The EC2 instance name'
+    Type: String
+    Default: GuidanceForCacheDatabaseQuery
+    MinLength: '1'
+    MaxLength: '64'
+    AllowedPattern: "^[a-zA-Z0-9]*$"
+
+Resources:
+  AppInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref AppInstanceClass
+      ImageId: ami-0d8f91fa8ecdc3b58
+      KeyName: !Ref AppInstanceKeyName
+      Monitoring: true
+      SecurityGroupIds:
+        - !Ref AppInstanceSecurityGroup
+      SubnetId: !Ref AppInstanceSubnet
+      Tags:
+        -
+          Key: Name
+          Value: !Ref AppInstanceName
