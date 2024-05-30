@@ -1,3 +1,6 @@
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 Description: Create and EC2 to demonstrate the benefits of pairing RDBSM workloads with AWS ElastiCache
@@ -35,7 +38,7 @@ Parameters:
   AppInstanceSecurityGroup:
     Description: 'A security group with inbound rules for SSH connectivity from customer computer. And RDBMS and ElastiCache'
     Type: String
-    Default: sg-0a87f73dcc1dffc4f
+    Default: default_security_group_id 
     MinLength: '8'
     MaxLength: '63'
     # AllowedPattern: "^[a-zA-Z]+[0-9]+[-]*$"
@@ -43,7 +46,7 @@ Parameters:
   AppInstanceSubnet:
     Description: 'A valid subnet name in the default VPC'
     Type: String
-    Default: subnet-05cfa282f9b9dc8df
+    Default: default_subnet_name_id 
     MinLength: '8'
     MaxLength: '63'
     # AllowedPattern: "^[A-Za-z]+[0-9A-Z-]*$"
