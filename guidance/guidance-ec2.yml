@@ -3,7 +3,7 @@
 
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
-Description: Create and EC2 to demonstrate the benefits of pairing RDBSM workloads with AWS ElastiCache
+Description: Create and EC2 to demonstrate the benefits of pairing RDBMS workloads with AWS ElastiCache
 Metadata:
   AWS::CloudFormation::Interface:
     ParameterGroups:
@@ -29,7 +29,6 @@ Parameters:
   AppInstanceClass:
     Description: 'The application EC2 instance class'
     Type: String
-    # Default: c6g.xlarge
     Default: t4g.micro
     MinLength: '8'
     MaxLength: '63'
@@ -38,7 +37,7 @@ Parameters:
   AppInstanceSecurityGroup:
     Description: 'A security group with inbound rules for SSH connectivity from customer computer. And RDBMS and ElastiCache'
     Type: String
-    Default: default_security_group_id 
+    Default: a-valid-sg-that-allows-ssh-database-and-EC-access
     MinLength: '8'
     MaxLength: '63'
     # AllowedPattern: "^[a-zA-Z]+[0-9]+[-]*$"
@@ -46,7 +45,7 @@ Parameters:
   AppInstanceSubnet:
     Description: 'A valid subnet name in the default VPC'
     Type: String
-    Default: default_subnet_name_id 
+    Default: pick-a-valid-subnet
     MinLength: '8'
     MaxLength: '63'
     # AllowedPattern: "^[A-Za-z]+[0-9A-Z-]*$"
@@ -78,6 +77,14 @@ Resources:
       SecurityGroupIds:
         - !Ref AppInstanceSecurityGroup
       SubnetId: !Ref AppInstanceSubnet
+      BlockDeviceMappings: 
+      - DeviceName: "/dev/xvda"
+        Ebs: 
+          VolumeType: "io1"
+          Iops: "200"
+          DeleteOnTermination: "true"
+          VolumeSize: !Ref AppInstanceStorage
+          Encrypted: "true"
       Tags:
         -
           Key: Name
