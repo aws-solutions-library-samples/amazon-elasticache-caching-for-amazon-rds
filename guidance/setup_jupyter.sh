@@ -1,7 +1,10 @@
 #!/bin/bash
 #
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
 # debug flags
-#set -ex
+# set -ex
 source .venv/bin/activate
 
 echo 'y' | jupyter notebook --generate-config
