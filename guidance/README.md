@@ -29,14 +29,14 @@ You are responsible for the cost of the AWS services used while running this Gui
 As of 03/28/2024, the cost for running this guidance with the default settings using AWS ElastiCache instance type cache.t2.x.small utilizing 1 primary, in the US East (N. Virginia) for on-demand pricing is approximately $24.82 USD total per month. AWS The RDS database cost is estimated at $14.71. However, cost will greatly depend on the, instance size, and RDS licensing model selected. Reserved instance pricing will reduce cost for both RDS and ElastiCache. ElastiCache is also available in a serverless offering where pay-per-consumption cost model is applicable. 
 
 | Service               | Assumptions                                       | Estimated Cost Per Month |
-| --------------------- | ------------------------------------------------- | -------------            | 
-| Amazon ElastiCache    | 2 Instance (cache.t2.small) used for 730 hours	| $24.82                   |
-| Amazon RDS MySQL      | 1 Instance (db.t3.micro) used for 730 hours       | $14.71                   |
+| --------------------- | ------------------------------------------------- | ------------- | 
+| Amazon ElastiCache    | 2 Instance (cache.t2.small) used for 730 hours	| $24.82 |
+| Amazon RDS MySQL      | 1 Instance (db.t3.micro) used for 730 hours       | $14.71 |
 
 
 ## Prerequisites
 
-This guidance is targeted towards those familiar with the AWS RDS Service. The users are expected to have a basic understanding of AWS RDS service and database access patterns. It guides users how to utilize AWS ElastiCache in addition to their existing relational database. Effectively paring your database with a caching service. It should be run in US East N.Virginia region.
+This guidance is targeted towards those familiar with the AWS RDS Service. The users are expected to have a basic understanding of AWS RDS service and database access patterns. It guides users how to utilize AWS ElastiCache in addition to their existing relational database. Effectively paring your database with a caching service. It should be run in US East N.Virginia region. This guidance is not intended for production workloads. For example, recommended security configurations are not included. For production systems it is strongly recommended that data should be encrypted both in transit and at rest.
 
 
 ### Operating System
@@ -76,9 +76,9 @@ All regions where AWS RDS MySQL and AWS ElastiCache are offered.
 3. Clone the repository by executing ```git clone <repo name> ```
 4. Change directory to the guidance directory ```cd guidance```
 5. Execute the setup_host script ```./setup_host.sh```
-6. Log in to the same instance from a separate session and navigate to the same directory and execute ```./setup_jupyter.sh``` script.
-7. In your computer browser enter the EC2's public IP address and port for example ```http://1.2.3.4:8888`` Note that this is not a secured service. 
-8. Enter the preset password for your Jupyter notebook "test123"
+6. Log in to the same instance from a separate session and navigate to the same directory and execute ```./setup_jupyter.sh``` script. Enter the initial password. Commit this to memory as you will have to enter it once the notebook is running.
+7. In your computer browser enter the EC2's public IP address and port for example ```http://1.2.3.4:8888`` Note: that jupyter configuration is not a secured as it is running the http (no s) protocol. In order to secure jupyter notebook please configure https protocol as documented here: https://jupyter-notebook.readthedocs.io/en/6.2.0/public_server.html#running-a-public-notebook-server 
+8. Enter the password for your Jupyter notebook. (The password entered at step 6)
 9. In your first session edit the .env file and update it with your database and ElastiCache related information.
 10. Source the .env file ```source .env``` to export the parameters.
 
@@ -88,26 +88,20 @@ It is not part of this guidance to install and configure client applications for
 
 ## Running the Guidance
 
-* Execute the `scenario01.py` script. This workload accesses the database only and captures command level performance data in a logfile. In the directory where you executed the `setup_host.sh` and the Python virtual environment is activated, the first connection, execute: 
-```bash
-(.venv) [ec2-user]$ python scenario01.py --users 10 --queries 1000 --read_rate 80
-```
-
+* Execute the scenario01.py script. This workload accesses the database only and captures command level performance data in a logfile. In the directory where you executed the setup_host.sh and the Python virtual environment is activated, the first connection, execute: ```python scenario01.py --users 10 --queries 1000 --read_rate 80```
 * If deployment was correct  you should see a response similar to this. (small sample execution)
-
-```bash  
+  
 (.venv) [ec2-user]$ python scenario01.py --users 1 --queries 10 --read_rate 80
 Reads: 8
 Writes: 2
 Logfile located here: logs/scenario01_139007_mwae8c4k.json
-```
-* Open the Jupyter notebook `plot_results_db_only.ipynb` file and update the logfile name in the second cell. For example ```log_pattern = 'scenario01_139007_mwae8c4k.json```
+
+* Open the Jupyter notebook plot_results_db_only.ipynb file and update the logfile name in the second cell. For example ```log_pattern = 'scenario01_139007_mwae8c4k.json```
 
 * From the run option select run all cells. The output of the last cell will show both the number of executions per second and the average response time. 
 
 * To compare the performance boost provided by ElastiCache repeat the above steps but use the scenario02.py script. For example execute ```python scenario02.py --users 1 --queries 10 --read_rate 80``` The output should be similar.
 
-```bash
 (.venv) [ec2-user]$ python scenario02.py --users 1 --queries 10 --read_rate 80
 Connected to Database
 Connected to ElastiCache
@@ -116,9 +110,8 @@ Writes: 0
 Cache hits: 10
 Cache misses: 0
 Logfile located here: logs/scenario02_176908_0y2qr55f.json
-```
 
-* Open the Jupyter notebook `plot_results_db_and_cache.ipynb` file and update the logfile name in the second cell. For example ```log_pattern = 'scenario02_176908_0y2qr55f.json```
+* Open the Jupyter notebook plot_results_db_and_cache.ipynb file and update the logfile name in the second cell. For example ```log_pattern = 'scenario02_176908_0y2qr55f.json```
 
 Then select run all cells to plot the performance of the second scenario. Note that a small execution may not be sufficient to demonstrate the performance advantage of adding a cache. 
 
@@ -148,3 +141,4 @@ For feedback please access the github page <here>
 Include a legal disclaimer
 
 *Customers are responsible for making their own independent assessment of the information in this Guidance. This Guidance: (a) is for informational purposes only, (b) represents AWS current product offerings and practices, which are subject to change without notice, and (c) does not create any commitments or assurances from AWS and its affiliates, suppliers or licensors. AWS products or services are provided “as is” without warranties, representations, or conditions of any kind, whether express or implied. AWS responsibilities and liabilities to its customers are controlled by AWS agreements, and this Guidance is not part of, nor does it modify, any agreement between AWS and its customers.*
+

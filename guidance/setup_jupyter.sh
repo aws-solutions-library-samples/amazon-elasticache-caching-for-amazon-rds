@@ -1,19 +1,33 @@
 #!/bin/bash
 #
-# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# SPDX-License-Identifier: MIT-0
-
 # debug flags
-# set -ex
+#set -ex
 source .venv/bin/activate
 
-echo 'y' | jupyter notebook --generate-config
+# Save old configuration file if exits
+JUPYTER_CONFIG="$HOME/.jupyter/jupyter_lab_config.py"
 
-PASSWORD=$(python -c "from jupyter_server.auth import passwd; print(passwd('test123'))")
+mv ${JUPYTER_CONFIG} ${JUPYTER_CONFIG}_$(date +%F-%T)
 
-sed -i "s|# c.NotebookApp.password = ''|c.NotebookApp.password = '${PASSWORD}'|g"   ~/.jupyter/jupyter_notebook_config.py
-sed -i "s/# c.NotebookApp.ip = 'localhost'/c.NotebookApp.ip='0.0.0.0'/g"            ~/.jupyter/jupyter_notebook_config.py
-sed -i "s/# c.NotebookApp.port = 8888/c.NotebookApp.port = 8888/g"                  ~/.jupyter/jupyter_notebook_config.py
-sed -i "s/# c.NotebookApp.open_browser = True/c.NotebookApp.open_browser = False/g" ~/.jupyter/jupyter_notebook_config.py
+echo 'y' | jupyter lab --generate-config 
+
+read -s -p "Password: " PASSWORD 
+
+echo ""
+echo "entered passwrord ${PASSWORD}"
+PASSWORD=$(python -c "from jupyter_server.auth import passwd; print(passwd('${PASSWORD}'))")
+
+echo "before"
+cat ${JUPYTER_CONFIG} | grep 'c.ServerApp.password'
+
+sed -i "s|# c.ServerApp.password = ''|c.ServerApp.password  = '${PASSWORD}'|g"   ${JUPYTER_CONFIG} 
+
+echo "after"
+cat ${JUPYTER_CONFIG} | grep 'ServerApp.password'
+
+sed -i "s/# c.ServerApp.allow_password_change = True/c.ServerApp.allow_password_change = True/g" ${JUPYTER_CONFIG}
+sed -i "s/# c.ServerApp.ip = 'localhost'/c.ServerApp.ip='0.0.0.0'/g" 	    		        ${JUPYTER_CONFIG} 
+sed -i "s/# c.ServerApp.port = 8888/c.ServerApp.port = 8888/g"		    		        ${JUPYTER_CONFIG} 
+sed -i "s/# c.ServerApp.open_browser = True/c.ServerApp.open_browser = False/g"  	        ${JUPYTER_CONFIG} 
 
 jupyter lab &
