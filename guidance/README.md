@@ -20,7 +20,7 @@
 
 #### Architecture overview ####
 
-<img width="676" alt="architecture-for-adding-caching-to-a-database" src="assets/images/architecture-diagram.png">
+<img width="676" alt="architecture-for-adding-caching-to-a-database" src="assets/images/guidance-architecture-diagram.png">
 
 ### Cost
 
@@ -52,7 +52,6 @@ Install dependencies by executing the setup_host.sh script. This script will ins
 ### Third-party tools
 
 This guidance uses Jupyter lab and the included notebooks to visualize/plot the performance data captured in json logs.
-For convenience reasons a Jupyter password has been set to 'test123'. 
 Seed data is from the Airportdb sample database located here: https://dev.mysql.com/doc/airportdb/en/. However, by modifying the read and write queries, any seed data can be used. 
 
 ### AWS account requirements
