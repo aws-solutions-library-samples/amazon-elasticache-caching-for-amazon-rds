@@ -15,7 +15,6 @@ read -s -p "Password: " PASSWORD
 echo ""
 PASSWORD=$(python -c "from jupyter_server.auth import passwd; print(passwd('${PASSWORD}'))")
 
-
 sed -i "s|# c.ServerApp.password = ''|c.ServerApp.password  = '${PASSWORD}'|g"   ${JUPYTER_CONFIG} 
 sed -i "s/# c.ServerApp.allow_password_change = True/c.ServerApp.allow_password_change = True/g" ${JUPYTER_CONFIG}
 sed -i "s/# c.ServerApp.ip = 'localhost'/c.ServerApp.ip='0.0.0.0'/g" 	    		        ${JUPYTER_CONFIG} 
