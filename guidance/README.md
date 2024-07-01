@@ -16,7 +16,7 @@
 
 ## Overview
 
-1. This guidance was created to help customers with database workloads that have high read:write (70:30) ratios and are looking to boost application performance, and at the same time reduce overall cost. Qualifying database workloads will see an increase in the number of transactions, a reduction in response time, and an overall reduction in cost. It is expected that two services together can perform a task faster. However, when AWS ElastiCache is paired with qualifying database workloads not only the performance increases but the total cost of the two services is lower than the cost of scaling the database alone to deliver a similar performance.
+This guidance was created to help customers with database workloads that have high read:write (70:30) ratios and are looking to boost application performance, and at the same time reduce overall cost. Qualifying database workloads will see an increase in the number of transactions, a reduction in response time, and an overall reduction in cost. It is expected that two services together can perform a task faster. However, when AWS ElastiCache is paired with qualifying database workloads not only the performance increases but the total cost of the two services is lower than the cost of scaling the database alone to deliver a similar performance.
 
 #### Architecture overview ####
 
@@ -26,13 +26,15 @@
 
 You are responsible for the cost of the AWS services used while running this Guidance.
 
-As of 03/28/2024, the cost for running this guidance with the default settings using AWS ElastiCache instance type cache.t2.x.small utilizing 1 primary, in the US East (N. Virginia) for on-demand pricing is approximately $24.82 USD total per month. AWS The RDS database cost is estimated at $14.71. However, cost will greatly depend on the, instance size, and RDS licensing model selected. Reserved instance pricing will reduce cost for both RDS and ElastiCache. ElastiCache is also available in a serverless offering where pay-per-consumption cost model is applicable. 
+As of 03/28/2024, the cost for running this guidance with the default settings using AWS ElastiCache instance type cache.t2.x.small utilizing 1 primary, in the US East (N. Virginia) for on-demand pricing is approximately $24.82 USD total per month. AWS The RDS database cost is estimated at $15.86 per month using instance type (db.t3.micro), and storage(30 gp2 GB). However, for any service cost will greatly depend on the, instance type, and RDS licensing model selected. Reserved instance pricing will reduce cost for both RDS and ElastiCache. ElastiCache is also available in a serverless offering where pay-per-consumption cost model is applicable.
 
 | Service               | Assumptions                                       | Estimated Cost Per Month |
 | --------------------- | ------------------------------------------------- | ------------- | 
 | Amazon ElastiCache    | 2 Instance (cache.t2.small) used for 730 hours	| $24.82 |
-| Amazon RDS MySQL      | 1 Instance (db.t3.micro) used for 730 hours       | $14.71 |
+| Amazon RDS MySQL      | 1 Instance (db.t3.micro) used for 730 hours       | $15.86 |
+| Total                 |                                                   | $40.68|
 
+We recommend creating a [Budget](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html)  through [AWS Cost Explorer](https://aws.amazon.com/aws-cost-management/aws-cost-explorer/) to help manage costs. Prices are subject to change. For full details, refer to the pricing webpage for each AWS service used in this Guidance.
 
 ## Prerequisites
 
@@ -72,7 +74,7 @@ All regions where AWS RDS MySQL and AWS ElastiCache are offered.
 
 1. Create an EC2 instance with at least 1GB of memory using the Amazon Linux 2023 image. For convenience reason the repository includes the cloud formation template called guidance-ec2.yaml. Use AWS CloudFormation and with this template to create and EC2 instance.
 2. Log in to your instance from the AWS console via Session Manager or via SSH.
-3. Clone the repository by executing ```git clone <repo name> ```
+3. Clone the repository by executing ```git clone <this repo name> ```
 4. Change directory to the guidance directory ```cd guidance```
 5. Execute the setup_host script ```./setup_host.sh```
 6. Log in to the same instance from a separate session and navigate to the same directory and execute ```./setup_jupyter.sh``` script. Enter the initial password. Commit this to memory as you will have to enter it once the notebook is running.
@@ -90,10 +92,12 @@ It is not part of this guidance to install and configure client applications for
 * Execute the scenario01.py script. This workload accesses the database only and captures command level performance data in a logfile. In the directory where you executed the setup_host.sh and the Python virtual environment is activated, the first connection, execute: ```python scenario01.py --users 10 --queries 1000 --read_rate 80```
 * If deployment was correct  you should see a response similar to this. (small sample execution)
   
-(.venv) [ec2-user]$ python scenario01.py --users 1 --queries 10 --read_rate 80
+Sample execution:
+
+```(.venv) [ec2-user]$ python scenario01.py --users 1 --queries 10 --read_rate 80
 Reads: 8
 Writes: 2
-Logfile located here: logs/scenario01_139007_mwae8c4k.json
+Logfile located here: logs/scenario01_139007_mwae8c4k.json```
 
 * Open the Jupyter notebook plot_results_db_only.ipynb file and update the logfile name in the second cell. For example ```log_pattern = 'scenario01_139007_mwae8c4k.json```
 
@@ -101,14 +105,16 @@ Logfile located here: logs/scenario01_139007_mwae8c4k.json
 
 * To compare the performance boost provided by ElastiCache repeat the above steps but use the scenario02.py script. For example execute ```python scenario02.py --users 1 --queries 10 --read_rate 80``` The output should be similar.
 
-(.venv) [ec2-user]$ python scenario02.py --users 1 --queries 10 --read_rate 80
+Sample execution result:
+
+```(.venv) [ec2-user]$ python scenario02.py --users 1 --queries 10 --read_rate 80
 Connected to Database
 Connected to ElastiCache
 Reads: 10
 Writes: 0
 Cache hits: 10
 Cache misses: 0
-Logfile located here: logs/scenario02_176908_0y2qr55f.json
+Logfile located here: logs/scenario02_176908_0y2qr55f.json```
 
 * Open the Jupyter notebook plot_results_db_and_cache.ipynb file and update the logfile name in the second cell. For example ```log_pattern = 'scenario02_176908_0y2qr55f.json```
 
@@ -120,8 +126,7 @@ To see the potential improvements ElastiCache can provide to your application. R
 
 ## Cleanup
 
-To clean up your environment stop all services and delete the MySQL database and ElastiCache cluster. Finally delete the EC2 instance from where you executed the commands. 
-
+To clean up your environment stop all services and delete the MySQL database and ElastiCache cluster. Finally delete the EC2 instance from where you executed the commands by deleting the CloudFormation stack that created the EC2 instance. 
 
 ## FAQ, known issues, additional considerations, and limitations
 
