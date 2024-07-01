@@ -90,14 +90,16 @@ It is not part of this guidance to install and configure client applications for
 ## Running the Guidance
 
 * Execute the scenario01.py script. This workload accesses the database only and captures command level performance data in a logfile. In the directory where you executed the setup_host.sh and the Python virtual environment is activated, the first connection, execute: ```python scenario01.py --users 10 --queries 1000 --read_rate 80```
-* If deployment was correct  you should see a response similar to this. (small sample execution)
+* If deployment was correct you should see a response similar to this. (small sample execution)
   
 Sample execution:
 
-```(.venv) [ec2-user]$ python scenario01.py --users 1 --queries 10 --read_rate 80
+```
+(.venv) [ec2-user]$ python scenario01.py --users 1 --queries 10 --read_rate 80
 Reads: 8
 Writes: 2
-Logfile located here: logs/scenario01_139007_mwae8c4k.json```
+Logfile located here: logs/scenario01_139007_mwae8c4k.json
+```
 
 * Open the Jupyter notebook plot_results_db_only.ipynb file and update the logfile name in the second cell. For example ```log_pattern = 'scenario01_139007_mwae8c4k.json```
 
@@ -107,16 +109,18 @@ Logfile located here: logs/scenario01_139007_mwae8c4k.json```
 
 Sample execution result:
 
-```(.venv) [ec2-user]$ python scenario02.py --users 1 --queries 10 --read_rate 80
+```
+(.venv) [ec2-user]$ python scenario02.py --users 1 --queries 10 --read_rate 80
 Connected to Database
 Connected to ElastiCache
 Reads: 10
 Writes: 0
 Cache hits: 10
 Cache misses: 0
-Logfile located here: logs/scenario02_176908_0y2qr55f.json```
+Logfile located here: logs/scenario02_176908_0y2qr55f.json
+```
 
-* Open the Jupyter notebook plot_results_db_and_cache.ipynb file and update the logfile name in the second cell. For example ```log_pattern = 'scenario02_176908_0y2qr55f.json```
+* Open the Jupyter notebook plot_results_db_and_cache.ipynb file and update the logfile name in the second cell. For example ```log_pattern = scenario02_176908_0y2qr55f.json```
 
 Then select run all cells to plot the performance of the second scenario. Note that a small execution may not be sufficient to demonstrate the performance advantage of adding a cache. 
 
@@ -126,7 +130,7 @@ To see the potential improvements ElastiCache can provide to your application. R
 
 ## Cleanup
 
-To clean up your environment stop all services and delete the MySQL database and ElastiCache cluster. Finally delete the EC2 instance from where you executed the commands by deleting the CloudFormation stack that created the EC2 instance. 
+To clean up your environment stop all services and delete the MySQL database and ElastiCache cluster. Finally delete the EC2 instance from where you executed the commands by first removing the termination protection of the instance then deleting the CloudFormation stack that created the EC2 instance. 
 
 ## FAQ, known issues, additional considerations, and limitations
 
