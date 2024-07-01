@@ -10,6 +10,7 @@ Metadata:
           - AppInstanceName
           - AppInstanceKeyName
           - AppInstanceClass
+          - AppInstanceAMI
           - AppInstanceSecurityGroup
           - AppInstanceSubnet
           - AppInstanceStorage
@@ -30,6 +31,12 @@ Parameters:
     MinLength: '8'
     MaxLength: '63'
     AllowedPattern: "^[a-z0-9.]*$"
+
+  AppInstanceAMI:
+    Description: 'The AMI to be used. Note this is region dependent the default AMI is for US-EAST-1'
+    Type: String
+    Default: ami-0d8f91fa8ecdc3b58
+    AllowedPattern: "^[a-z]+[-]+[a-z0-9]*$"
 
   AppInstanceSecurityGroup:
     Description: 'A security group with inbound rules for SSH connectivity from customer computer. And RDBMS and ElastiCache'
@@ -68,7 +75,7 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: !Ref AppInstanceClass
-      ImageId: ami-0d8f91fa8ecdc3b58
+      ImageId: !Ref AppInstanceAMI
       KeyName: !Ref AppInstanceKeyName
       Monitoring: true
       DisableApiTermination: true
