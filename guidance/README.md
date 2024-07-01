@@ -78,7 +78,7 @@ All regions where AWS RDS MySQL and AWS ElastiCache are offered.
 4. Change directory to the guidance directory ```cd guidance```
 5. Execute the setup_host script ```./setup_host.sh```
 6. Log in to the same instance from a separate session and navigate to the same directory and execute ```./setup_jupyter.sh``` script. Enter the initial password. Commit the password to memory as you will have to enter it once the notebook is running. Note: This Jupyter configuration is not meant for a production environment as it uses a self-signed certificate. For a proper production environment follow your company standars to aquire a certificate from a known Certificate Authority. The Jupyter server used in this guide uses a self-signed certificate that your web brouses will probably not trust. You can accept the certificate or follow internal standards and repalce the Jupyter server key and certificate in the ~/.jupyter/jupyter_lab_config.py file. More documentation is available [here](https://jupyter-notebook.readthedocs.io/en/6.2.0/public_server.html#running-a-public-notebook-server)
-7. In your computer browser enter your EC2's public IP address and port for example ```https://1.2.3.4:8888`` 
+7. In your computer browser enter your EC2's public IP address and port for example ```https://1.2.3.4:8888`` Unless you configured Jupyter with other than the self signed certificate accept the warning and continue.
 8. Enter the password for your Jupyter notebook. (The password entered at step 6)
 9. In your first session edit the .env file and update it with your database and ElastiCache related information.
 10. Source the .env file ```source .env``` to export the parameters.
