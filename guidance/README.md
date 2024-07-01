@@ -1,4 +1,4 @@
-# Guidance for boosting database performance reads with AWS ElastiCache
+# Guidance for Optimizing Cost of RDS for MySQL
 
 ## Table of Content
 
