@@ -17,9 +17,9 @@ Metadata:
 Parameters:
 ### Key PARAMS
   AppInstanceKeyName:
-    Description: 'Name of a key pair that exists in the region'
+    Description: 'Name of an SSH key pair that exists in the region'
     Type: String
-    Default: US-EAST1
+    Default: a-valid-ssh-key-pair
     MinLength: '3'
     MaxLength: '63'
     AllowedPattern: "^[A-Za-z]+[0-9A-Z-]*$"
@@ -41,7 +41,7 @@ Parameters:
   AppInstanceSecurityGroup:
     Description: 'A security group with inbound rules for SSH connectivity from customer computer. And RDBMS and ElastiCache'
     Type: String
-    Default: a-valid-sg-that-allows-ssh-database-and-EC-access
+    Default: a-valid-subnet-group-that-allows-ssh-database-and-EC-access
     MinLength: '8'
     MaxLength: '63'
     # AllowedPattern: "^[a-zA-Z]+[0-9]+[-]*$"
