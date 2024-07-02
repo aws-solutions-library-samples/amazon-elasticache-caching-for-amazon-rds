@@ -72,7 +72,7 @@ All regions where AWS RDS MySQL and AWS ElastiCache are offered.
 
 ## Deployment Steps
 
-1. Create an EC2 instance with at least 1GB of memory using the Amazon Linux 2023 image. For convenience reason the repository includes the cloud formation template called guidance-ec2.yaml. Use AWS CloudFormation and with this template to create and EC2 instance.
+1. If you have an existing EC2 instance with at least 1GB of memory using the Amazon Linux 2023 image with network configuration that will allow it to connect both to your RDBMS and ElastiCache services and SSH connectivity. Alternately and for you convenience the repository also includes a cloud formation template called guidance-ec2.yaml. Use AWS CloudFormation and with this template to create an EC2 instance. If you decide to use the CloudFormation template please specify all parameters that are valid for your AWS VPC (Virtual Private Cloud) Such as the SSH key to use, the AMI image ID, security group name and subnet group name.
 2. Log in to your instance from the AWS console via Session Manager or via SSH.
 3. Clone the repository by executing ```git clone <this repo name> ```
 4. Change directory to the guidance directory ```cd guidance```
