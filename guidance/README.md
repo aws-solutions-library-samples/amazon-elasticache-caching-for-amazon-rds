@@ -6,13 +6,17 @@
     - [Cost](#cost)
 2. [Prerequisites](#prerequisites)
     - [Operating System](#operating-system)
+    - [Services](#services)
+    - [Client Software](#Client-Software-dependencies)
+    - [Third party tools](#Third-party-tools)
 3. [Deployment Steps](#deployment-steps)
 4. [Deployment Validation](#deployment-validation)
 5. [Running the Guidance](#running-the-guidance)
 6. [Next Steps](#next-steps)
 7. [Cleanup](#cleanup)
 8. [FAQ, known issues, additional considerations, and limitations](#faq-known-issues-additional-considerations-and-limitations)
-9. [Notices](#notices)
+9. [Credids](#credits)
+10. [Notices](#notices)
 
 ## Overview
 
@@ -45,20 +49,19 @@ This guidance is targeted towards those familiar with the AWS RDS Service. The u
 
 This guidance runs in the AWS cloud utilizing an AWS EC2 compute instance based on the Amazon Linux 2023 AMI. With network access to both AWS RDS database service and AWS ElastiCache (both are required). In addition the EC2 compute instance will require public access on port 8888. The included Cloud Formation template can be used to create such an EC2 instance. The sample code also includes two Jupyter notebooks to analyze and visually plot the performance results. Note that public access to the EC2 host on port 8888 should be enabled from your computer only not all end user computers.
 
-### Service Dependencies
+### Services
 
-This quidance depends on AWS RDS MySQL, and AWS ElastiCache services. It is beyond the scope of this guidance to create those services. Pleae reffer 
+This quidance depends on AWS RDS MySQL, and AWS ElastiCache services. It is beyond the scope of this guidance to create those services. Pleae reffer to [AWS RDS](https://aws.amazon.com/rds/) and AWS [ElastiCache](https://aws.amazon.com/elasticache/)
 
-### Software dependencies 
+### Client Software dependencies 
 
-Install dependencies by executing the setup_host.sh script. This script will install gcc python3-devel at the host level. In addition to the two packages installed a python virtual environment is created with dependent modules installed from the requirements.txt file. The python modules are only committed to the virtual environment not the host. The includes commands are optimized to work on the EC2 instance created by the included CloudFormation template and are specific for the Amazon Linux 2023 AMI al2023-ami-2023.4.20240319.1-kernel-6.1-arm64. This image is specific to the us-east-1 region. Other OS or AMI configuration may require additional steps.
-
-- At the OS prompt execute the setup_host.sh script to install and configure all necessary software and to create the Python virtual environment.
+Install dependencies by executing the `setup_host.sh` script. This script will install gcc python3-devel at the host level. In addition to the two packages installed a python virtual environment is created with dependent modules installed from the requirements.txt file. The python modules are only committed to the virtual environment not the host. The includes commands are optimized to work on the EC2 instance created by the included CloudFormation template and are specific for the Amazon Linux 2023 AMI al2023-ami-2023.4.20240319.1-kernel-6.1-arm64. This image is specific to the us-east-1 region. Other OS or AMI configuration may require additional steps.
 
 ### Third-party tools
 
-This guidance uses Jupyter lab and the included notebooks to visualize/plot the performance data captured in json logs.
-Seed data is from the Airportdb sample database located here: https://dev.mysql.com/doc/airportdb/en/. However, by modifying the read and write queries, any seed data can be used. 
+This guidance uses Jupyter lab and the included notebooks to visualize/plot the performance data captured in the json logs.
+Seed data is from the FlughafenDB. (2015). Stefan Proell, Eva Zangerle, Wolfgang Gassler. www.flughafendb.cc
+However, by modifying the read and write queries, any seed data can be used. 
 
 ### AWS account requirements
 
@@ -148,8 +151,24 @@ Caching is beneficial for databases that execute a high read to write ratio work
 
 For feedback please access the github page <here>
 
-## Notices
+### Credits
 
+#### License for the airportdb Database
+This work is based on the FlughafenDB by Stefan Proell, Eva Zangerle, Wolfgang Gassler, which is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/ or send a letter to Creative Commons PO Box 1866, Mountain View, CA 94042.
+
+FlughafenDB. (2015). Stefan Proell, Eva Zangerle, Wolfgang Gassler. www.flughafendb.cc. https://doi.org/10.5281/zenodo.3968361
+
+![AirportDB - FlughafenDB](assets/images/AirportDB-schema.png)
+
+## Security
+
+See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+
+## License
+
+This library is licensed under the MIT-0 License. See the LICENSE file.
+
+## Notices
 Include a legal disclaimer
 
 *Customers are responsible for making their own independent assessment of the information in this Guidance. This Guidance: (a) is for informational purposes only, (b) represents AWS current product offerings and practices, which are subject to change without notice, and (c) does not create any commitments or assurances from AWS and its affiliates, suppliers or licensors. AWS products or services are provided “as is” without warranties, representations, or conditions of any kind, whether express or implied. AWS responsibilities and liabilities to its customers are controlled by AWS agreements, and this Guidance is not part of, nor does it modify, any agreement between AWS and its customers.*
