@@ -158,7 +158,7 @@ This work is based on the FlughafenDB by Stefan Proell, Eva Zangerle, Wolfgang G
 
 FlughafenDB. (2015). Stefan Proell, Eva Zangerle, Wolfgang Gassler. www.flughafendb.cc. https://doi.org/10.5281/zenodo.3968361
 
-![AirportDB - FlughafenDB](assets/images/AirportDB-schema.png)
+![AirportDB - FlughafenDB](../../docs/AirportDB-schema.png)
 
 ## Security
 
