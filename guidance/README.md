@@ -43,7 +43,11 @@ This guidance is targeted towards those familiar with the AWS RDS Service. The u
 
 ### Operating System
 
-Tis guidance runs in the AWS cloud utilizing an AWS EC2 compute instance based on the Amazon Linux 2023 AMI. With network access to both AWS RDS database service and AWS ElastiCache (both are required). In addition the EC2 compute instance will require public access on port 8888. The included Cloud Formation template can be used to create such an EC2 instance. The sample code also includes two Jupyter notebooks to analyze and visually plot the performance results. Note that public access to the EC2 host on port 8888 should be enabled from your computer only not all end user computers.
+This guidance runs in the AWS cloud utilizing an AWS EC2 compute instance based on the Amazon Linux 2023 AMI. With network access to both AWS RDS database service and AWS ElastiCache (both are required). In addition the EC2 compute instance will require public access on port 8888. The included Cloud Formation template can be used to create such an EC2 instance. The sample code also includes two Jupyter notebooks to analyze and visually plot the performance results. Note that public access to the EC2 host on port 8888 should be enabled from your computer only not all end user computers.
+
+### Service Dependencies
+
+This quidance depends on AWS RDS MySQL, and AWS ElastiCache services. It is beyond the scope of this guidance to create those services. Pleae reffer 
 
 ### Software dependencies 
 
