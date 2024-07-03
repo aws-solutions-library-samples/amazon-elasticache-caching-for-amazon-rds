@@ -22,6 +22,8 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
      -out $JUPYTER_CONFIG_DIR/jupyter-selfsigned.crt \
      -subj "/C=US"
 
+sudo chown $USER ${JUPYTER_CONFIG_DIR}/jupyter-selfsigned.key
+
 sed -i "s|# c.ServerApp.password = ''|c.ServerApp.password  = '${PASSWORD}'|g"                                  ${JUPYTER_CONFIG}
 sed -i "s/# c.ServerApp.allow_password_change = True/c.ServerApp.allow_password_change = True/g"                ${JUPYTER_CONFIG}
 sed -i "s/# c.ServerApp.ip = 'localhost'/c.ServerApp.ip='0.0.0.0'/g"                                            ${JUPYTER_CONFIG}
