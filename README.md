@@ -112,7 +112,7 @@ The output in the console should look similar to the following screenshot:
 ### Credits
 
 #### License for the airportdb Database
-This work is adapted from the Flughafen DB by Stefan Proell, Eva Zangerle, Wolfgang Gassler, which is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/ or send a letter to Creative Commons PO Box 1866, Mountain View, CA 94042.
+This work is based on the FlughafenDB by Stefan Proell, Eva Zangerle, Wolfgang Gassler, which is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/ or send a letter to Creative Commons PO Box 1866, Mountain View, CA 94042.
 
 FlughafenDB. (2015). Stefan Proell, Eva Zangerle, Wolfgang Gassler. www.flughafendb.cc. https://doi.org/10.5281/zenodo.3968361
 
