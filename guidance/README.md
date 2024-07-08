@@ -68,7 +68,7 @@ However, by modifying the read and write queries, any seed data can be used.
 Ability to create an EC2 instance and networking configuration to permit access to both the RDS server and the ElastiCache service and public access to the EC2 on port 8888 from the customer end computer only. (CIDR/32)
 
 **Example resources:**
-- RDS MySQL Database with the airportdb data loaded
+- RDS MySQL Database with the flughafendb (German for airportdb) data loaded from the third party location or similar.
 - AWS ElastiCache
 - VPC
 - SSH key in your region of choice
