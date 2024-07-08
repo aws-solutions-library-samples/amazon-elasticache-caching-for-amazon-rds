@@ -99,7 +99,7 @@ Enter password:
 
 ### Import the dataset
 ```
-zcat ./english/flughafendb_large.sql.gz | mysql -h <your-host> -u admin -p airportdb
+zcat flughafendb_large.sql.gz | mysql -h <your-host> -u admin -p airportdb
 Enter password:
 ```
 
