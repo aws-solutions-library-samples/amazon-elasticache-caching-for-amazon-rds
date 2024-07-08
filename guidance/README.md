@@ -68,7 +68,7 @@ However, by modifying the read and write queries, any seed data can be used.
 Ability to create an EC2 instance and networking configuration to permit access to both the RDS server and the ElastiCache service and public access to the EC2 on port 8888 from the customer end computer only. (CIDR/32)
 
 **Example resources:**
-- RDS MySQL Database with the flughafendb (German for airportdb) data loaded from the third party location or similar.
+- RDS MySQL Database with the English version of flughafendb data loaded from the third party location mentioned above.
 - AWS ElastiCache
 - VPC
 - SSH key in your region of choice
@@ -76,6 +76,29 @@ Ability to create an EC2 instance and networking configuration to permit access 
 ### Supported Regions
 
 All regions where AWS RDS MySQL and AWS ElastiCache are offered.
+
+## How to load the seed data
+
+The seed data may be loaded from here www.flughafendb.cc. Follow the steps in the README document for "Import using mysqldump" steps for the English version of the data. However name the database airportdb. The below steps are  slight modification of the steps suggested in the README file, using password authentication and using the airportdb name for the target databse.
+
+# Change to the directory with the zipped dump
+```cd english
+```
+
+# Concatenate the whole data set in one gzipped file 
+```cat flughafendb_large.sql.gz.part-* > flughafendb_large.sql.gz
+```
+
+# Create a new database in your MySQL instance
+'''mysql -h <your-host> -u admin -p -e "CREATE DATABASE airportdb;"
+Enter password:
+'''
+
+# Import the dataset
+```
+zcat ./english/flughafendb_large.sql.gz | mysql -h <your-host> -u admin -p airportdb
+Enter password:
+```
 
 ## Deployment Steps
 
