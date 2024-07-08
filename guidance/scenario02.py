@@ -54,12 +54,12 @@ SQLALCHEMY_DATABASE_RW_URL = f"{DB_ENGINE}://{params['user']}:{params['password'
 SQLALCHEMY_DATABASE_RO_URL = f"{DB_ENGINE}://{params['user']}:{params['password']}@{params['host']}:{params['port']}/{params['database']}"
 
 READ_QUERY = text("select p.firstname, p.lastname, count(*) \
-                from airportdb_small.passenger p, airportdb_small.booking b \
+                from airportdb.passenger p, airportdb.booking b \
                 where p.passenger_id = :passenger \
                 and p.passenger_id = b.passenger_id \
                 group by p.firstname, p.lastname")
 
-WRITE_QUERY = text("INSERT into airportdb_small.booking (flight_id, passenger_id, price, seat) \
+WRITE_QUERY = text("INSERT into airportdb.booking (flight_id, passenger_id, price, seat) \
                     VALUES(:flight, :passenger, 1000.00, '1A')")
 
 
