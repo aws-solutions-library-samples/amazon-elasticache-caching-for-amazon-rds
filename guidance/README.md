@@ -81,20 +81,23 @@ All regions where AWS RDS MySQL and AWS ElastiCache are offered.
 
 The seed data may be loaded from here www.flughafendb.cc. Follow the steps in the README document for "Import using mysqldump" steps for the English version of the data. However name the database airportdb. The below steps are  slight modification of the steps suggested in the README file, using password authentication and using the airportdb name for the target databse.
 
-# Change to the directory with the zipped dump
-```cd english
+### Change to the directory with the zipped dump
+```
+cd english
 ```
 
-# Concatenate the whole data set in one gzipped file 
-```cat flughafendb_large.sql.gz.part-* > flughafendb_large.sql.gz
+### Concatenate the whole data set in one gzipped file 
+```
+cat flughafendb_large.sql.gz.part-* > flughafendb_large.sql.gz
 ```
 
-# Create a new database in your MySQL instance
-'''mysql -h <your-host> -u admin -p -e "CREATE DATABASE airportdb;"
+### Create a new database in your MySQL instance
+'''
+mysql -h <your-host> -u admin -p -e "CREATE DATABASE airportdb;"
 Enter password:
 '''
 
-# Import the dataset
+### Import the dataset
 ```
 zcat ./english/flughafendb_large.sql.gz | mysql -h <your-host> -u admin -p airportdb
 Enter password:
