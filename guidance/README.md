@@ -92,10 +92,10 @@ cat flughafendb_large.sql.gz.part-* > flughafendb_large.sql.gz
 ```
 
 ### Create a new database in your MySQL instance
-'''
+```
 mysql -h <your-host> -u admin -p -e "CREATE DATABASE airportdb;"
 Enter password:
-'''
+```
 
 ### Import the dataset
 ```
