@@ -88,7 +88,7 @@ cd english
 
 ### Concatenate the whole data set in one gzipped file 
 ```
-cat flughafendb_large.sql.gz.part-* > flughafendb_large.sql.gz
+cat flughafendb_large.sql.gz.part-* > airportdb.sql.gz
 ```
 
 ### Create a new database in your MySQL instance
@@ -99,7 +99,7 @@ Enter password:
 
 ### Import the dataset
 ```
-zcat flughafendb_large.sql.gz | mysql -h <your-host> -u admin -p airportdb
+zcat airportdb.sql.gz | mysql -h <your-host> -u admin -p airportdb
 Enter password:
 ```
 
