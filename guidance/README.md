@@ -28,15 +28,16 @@ This guidance was created to help customers with database workloads that have hi
 
 ### Cost
 
-You are responsible for the cost of the AWS services used while running this Guidance.
+You are responsible for the cost of the AWS services used while running this guidance.
 
-As of 03/28/2024, the cost for running this guidance with the default settings using AWS ElastiCache instance type cache.t2.x.small utilizing 1 primary, in the US East (N. Virginia) for on-demand pricing is approximately $24.82 USD total per month. AWS The RDS database cost is estimated at $15.86 per month using instance type (db.t3.micro), and storage(30 gp2 GB). However, for any service cost will greatly depend on the, instance type, and RDS licensing model selected. Reserved instance pricing will reduce cost for both RDS and ElastiCache. ElastiCache is also available in a serverless offering where pay-per-consumption cost model is applicable.
+The cost for running this guidance will depend on the infrastructure used. Exisitng infrastructure may be used for no additional cost or individual services may be configured as below. All services are assumed to be in the US East (N. Virginia) region with on-demand pricing option. Using Amazon Elastic Compute Cloud (Amazon EC2) instance type t4g.micro with 8GB of Amazon Elastic Block Store (EBS) to run the simlated applicaiton workload. AWS ElastiCache provisioned instance type cache.t2.x.small utilizing 1 primary and 1 read replica. AWS RDS MySQL database using instance type (db.t3.micro), and storage(30 gp2 GB). For any service the cost will greatly depend on the, instance type, and RDS licensing model selected. Reserved pricing will greatly reduce cost for EC2, RDS, and ElastiCache. AWS ElastiCache is also available in a serverless offering where a pay-per-consumption cost model is applicable.
 
 | Service               | Assumptions                                       | Estimated Cost Per Month |
 | --------------------- | ------------------------------------------------- | ------------- | 
+| Amazon EC2            | 1 instance (t4g.micro) used for 730 hours         | $20.13 |
 | Amazon ElastiCache    | 2 Instance (cache.t2.small) used for 730 hours	| $24.82 |
 | Amazon RDS MySQL      | 1 Instance (db.t3.micro) used for 730 hours       | $15.86 |
-| Total                 |                                                   | $40.68|
+| Total                 |                                                   | $40.81|
 
 We recommend creating a [Budget](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html)  through [AWS Cost Explorer](https://aws.amazon.com/aws-cost-management/aws-cost-explorer/) to help manage costs. Prices are subject to change. For full details, refer to the pricing webpage for each AWS service used in this Guidance.
 
