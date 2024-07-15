@@ -15,7 +15,7 @@
 6. [Next Steps](#next-steps)
 7. [Cleanup](#cleanup)
 8. [FAQ, known issues, additional considerations, and limitations](#faq-known-issues-additional-considerations-and-limitations)
-9. [Credids](#credits)
+9. [Credits](#credits)
 10. [Notices](#notices)
 
 ## Overview
@@ -42,7 +42,7 @@ We recommend creating a [Budget](https://docs.aws.amazon.com/cost-management/lat
 
 ## Prerequisites
 
-This guidance is targeted towards those familiar with the AWS RDS Service. The users are expected to have a basic understanding of AWS RDS service and database access patterns. It guides users how to utilize AWS ElastiCache in addition to their existing relational database. Effectively paring your database with a caching service. It should be run in US East N.Virginia region. This guidance is not intended for production workloads. For example, recommended security configurations are not included. For production systems it is strongly recommended that data should be encrypted both in transit and at rest.
+This guidance is targeted towards those familiar with the AWS RDS Service. The users are expected to have a basic understanding of AWS RDS service and database access patterns. It guides users how to utilize AWS ElastiCache in addition to their existing relational database. Effectively paring your database with a caching service. It should be run in US East N. Virginia region. This guidance is not intended for production workloads. For example, recommended security configurations are not included. For production systems it is strongly recommended that data should be encrypted both in transit and at rest.
 
 
 ### Operating System
@@ -79,7 +79,7 @@ All regions where AWS RDS MySQL and AWS ElastiCache are offered.
 
 ## How to load the seed data
 
-The seed data may be loaded from here www.flughafendb.cc. Follow the steps in the README document for "Import using mysqldump" steps for the English version of the data. However name the database airportdb. The below steps are  slight modification of the steps suggested in the README file, using password authentication and using the airportdb name for the target databse.
+The seed data may be loaded from here www.flughafendb.cc. Follow the steps in the README document for "Import using mysqldump" steps for the English version of the data. However name the database airportdb. The below steps are  slight modification of the steps suggested in the README file, using password authentication and using the airportdb name for the target database.
 
 ### Change to the directory with the zipped dump
 ```
@@ -111,8 +111,8 @@ Enter password:
 4. Clone the repository by executing ```git clone <this repo name> ```
 5. Change directory to the guidance directory ```cd amazon-elasticache-caching-for-amazon-rds/guidance```
 6. Execute the setup_host script ```./setup_host.sh```
-7. Log in to the same instance from a separate session and navigate to the same directory and execute ```./setup_jupyter.sh``` script. Enter the initial password. Commit the password to memory as you will have to enter it once the notebook is running. Note: This Jupyter configuration is not meant for a production environment as it uses a self-signed certificate. For a proper production environment follow your company standars to aquire a certificate from a known Certificate Authority. The Jupyter server used in this guide uses a self-signed certificate that your web brouses will probably not trust. You can accept the certificate or follow internal standards and repalce the Jupyter server key and certificate in the ~/.jupyter/jupyter_lab_config.py file. More documentation is available [here](https://jupyter-notebook.readthedocs.io/en/6.2.0/public_server.html#running-a-public-notebook-server)
-8. In your computer browser enter your EC2's public IP address and port for example ```https://1.2.3.4:8888`` Unless you configured Jupyter with other than the self signed certificate accept the warning and continue.
+7. Log in to the same instance from a separate session and navigate to the same directory and execute ```./setup_jupyter.sh``` script. Enter the initial password. Commit the password to memory as you will have to enter it once the notebook is running. Note: This Jupyter configuration is not meant for a production environment as it uses a self-signed certificate. For a proper production environment follow your company standards to acquire a certificate from a known Certificate Authority. The Jupyter server used in this guide uses a self-signed certificate that your web browser will probably not trust. You can accept the certificate or follow internal standards and repalace the Jupyter server key and certificate in the ~/.jupyter/jupyter_lab_config.py file. More documentation is available [here](https://jupyter-notebook.readthedocs.io/en/6.2.0/public_server.html#running-a-public-notebook-server)
+8. In your computer browser enter your EC2's public IP address and port for example: ```https://1.2.3.4:8888`` Unless you configured Jupyter with other than the self signed certificate accept the warning and continue.
 9. Enter the password for your Jupyter notebook. (The password entered at step 6)
 10. In your first session edit the .env file and update it with your database and ElastiCache related information.
 11. Source the .env file ```source .env``` to export the parameters.
