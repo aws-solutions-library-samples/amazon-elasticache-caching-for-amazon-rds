@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
-Description: Create and EC2 to demonstrate the benefits of pairing RDBMS workloads with AWS ElastiCache
+Description: Create and EC2 (SO9443) to demonstrate the benefits of pairing RDBMS workloads with AWS ElastiCache
 Metadata:
   AWS::CloudFormation::Interface:
     ParameterGroups:
